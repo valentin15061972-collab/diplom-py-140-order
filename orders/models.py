@@ -6,12 +6,12 @@ from products.models import ProductInfo, Shop
 
 class Order(models.Model):
 
-    STATUS_CHOICES = [('created', 'создан'), ('confirmed', 'подтверждён'), ('sent', 'отправлен'),
+    STATUS_CHOICES = [('new', 'новый'), ('confirmed', 'подтверждён'), ('sent', 'отправлен'),
                       ('delivered', 'доставлен'), ('canceled', 'отменён')]
 
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='orders')
     created_at = models.DateTimeField(auto_now_add=True)
-    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='created')
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='new')
     contact = models.ForeignKey(Contact, on_delete=models.SET_NULL, blank=True, null=True, related_name='orders')
 
     def __str__(self):
